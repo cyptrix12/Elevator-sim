@@ -29,3 +29,15 @@ int ElevatorPosition()
 {
 	return posY;
 }
+
+bool isElevHigher(int Floor_height)
+{
+	if (posY > Floor_height)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}

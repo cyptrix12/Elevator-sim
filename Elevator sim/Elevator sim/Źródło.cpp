@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <gdiplus.h>
+#include <vector>
 #include "Draw.h"
 #include <string>
 #include "Elevator.h"
@@ -10,6 +11,7 @@ LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM
 void draw(HDC hdc);
 void ButtonsDraw(HWND hwnd, HINSTANCE instance);
 
+
 //(600 / 5)* currentFloor - 10
 
 const int timerID = 1;
@@ -18,6 +20,7 @@ const int Floors_Positions[5] = { 590,470,350,230,110 };
 bool isMoving = false;
 bool updown = false;
 int TargetFloor = 0;
+std::vector<int> Que;
 
 #define ID_BUTTON1 1000
 HWND hButton;
@@ -91,23 +94,54 @@ LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM
 		EndPaint(hwnd, &ps);
 		return 0;
 	case WM_COMMAND:
-	{int wmId = LOWORD(param);
-	switch (wmId)
-	{
-	case ID_BUTTON1:
-		isMoving = true;
-		TargetFloor = 1;
-		if (ElevatorPosition() < Floors_Positions[1])
-		{
-			updown = true;
+		{int wmId = LOWORD(param);
+		switch (wmId)
+			{
+			case 1004:
+			case 1008:
+			case 1012:
+			case 1016:
+			{
+				isMoving = true;
+				TargetFloor = 0;
+				updown = isElevHigher(Floors_Positions[TargetFloor]);
+				break;
+			}
+			case 1000:
+			case 1009:
+			case 1013:
+			case 1017:
+				isMoving = true;
+				TargetFloor = 1;
+				updown = isElevHigher(Floors_Positions[TargetFloor]);
+				break;
+			case 1001:
+			case 1005:
+			case 1014:
+			case 1018:
+				isMoving = true;
+				TargetFloor = 2;
+				updown = isElevHigher(Floors_Positions[TargetFloor]);
+				break;
+			case 1002:
+			case 1006:
+			case 1010:
+			case 1019:
+				isMoving = true;
+				TargetFloor = 3;
+				updown = isElevHigher(Floors_Positions[TargetFloor]);
+				break;
+			case 1003:
+			case 1007:
+			case 1011:
+			case 1015:
+				isMoving = true;
+				TargetFloor = 4;
+				updown = isElevHigher(Floors_Positions[TargetFloor]);
+				break;
+			}
+			
 		}
-		else if (ElevatorPosition() > Floors_Positions[1])
-		{
-			updown = false;
-		}
-
-	}
-	}
 	case WM_TIMER:
 		if (param == timerID)
 		{
