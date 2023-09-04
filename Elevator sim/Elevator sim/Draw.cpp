@@ -3,6 +3,7 @@
 #include "Elevator.h"
 #include "Floors.h"
 #include <gdiplus.h>
+#include<vector>
 
 void DrawMain(HDC hdc)
 {

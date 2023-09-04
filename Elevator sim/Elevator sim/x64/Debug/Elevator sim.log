@@ -1,3 +1,5 @@
-﻿  Źródło.cpp
-C:\Users\cypri\programowanie\projekt 4\projekt-4\Elevator sim\Elevator sim\Źródło.cpp(225,11): warning C4312: "typ rzutowania": konwersja z "int" na "HMENU" jest większej wielkości
-  Elevator sim.vcxproj -> C:\Users\cypri\programowanie\projekt 4\projekt-4\Elevator sim\x64\Debug\Elevator sim.exe
+﻿  Draw.cpp
+  Źródło.cpp
+C:\Users\wluda\source\repos\Elevator-sim\Elevator-sim\Elevator sim\Elevator sim\Źródło.cpp(225,27): warning C4312: "typ rzutowania": konwersja z "int" na "HMENU" jest większej wielkości
+  Generowanie kodu...
+  Elevator sim.vcxproj -> C:\Users\wluda\source\repos\Elevator-sim\Elevator-sim\Elevator sim\x64\Debug\Elevator sim.exe

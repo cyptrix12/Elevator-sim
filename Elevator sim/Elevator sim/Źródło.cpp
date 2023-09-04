@@ -4,7 +4,7 @@
 #include "Draw.h"
 #include <string>
 #include "Elevator.h"
-
+#include<vector>
 
 
 LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM lparam);
@@ -97,44 +97,44 @@ LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM
 		{int wmId = LOWORD(param);
 		switch (wmId)
 			{
-			case 1004:
-			case 1008:
-			case 1012:
-			case 1016:
+			case 1004://pietro 1
+			case 1008://pietro 2
+			case 1012://pietro 3
+			case 1016://pietro 4
 			{
 				isMoving = true;
 				TargetFloor = 0;
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
 			}
-			case 1000:
-			case 1009:
-			case 1013:
-			case 1017:
+			case 1000://pietro 0
+			case 1009://pietro 2
+			case 1013://pietro 3
+			case 1017://pietro 4
 				isMoving = true;
 				TargetFloor = 1;
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
-			case 1001:
-			case 1005:
-			case 1014:
-			case 1018:
+			case 1001://pietro 0
+			case 1005://pietro 1
+			case 1014://pietro 3
+			case 1018://pietro 4
 				isMoving = true;
 				TargetFloor = 2;
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
-			case 1002:
-			case 1006:
-			case 1010:
-			case 1019:
+			case 1002://pietro 0
+			case 1006://pietro 1
+			case 1010://pietro 2
+			case 1019://pietro 4
 				isMoving = true;
 				TargetFloor = 3;
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
-			case 1003:
-			case 1007:
-			case 1011:
-			case 1015:
+			case 1003://pietro 0
+			case 1007://pietro 1
+			case 1011://pietro 2
+			case 1015://pietro 3
 				isMoving = true;
 				TargetFloor = 4;
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
