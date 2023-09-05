@@ -2,13 +2,16 @@
 #include <Windows.h>
 #include<vector>
 
-struct Request {};
-std::vector<int>Elev_vect;
+struct Request {
+	int RequestFloor;
+	int DestinationFloor;
+};
+
 void DrawElevator(HDC hdc);
 void UpdateElevatorPosition(bool updown);
 int ElevatorPosition();
 bool isElevHigher(int Floor_height);
-bool ElevatorOpen(int current_Floor);
+void ElevatorOpen(int current_Floor);
 
 
 static int posY = 590;

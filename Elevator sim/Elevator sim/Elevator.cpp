@@ -5,15 +5,7 @@
 #include<vector>
 
 
-struct Request {
-	int RequestFloor;
-	int DestinationFloor;
-};
-
-
-
 Request CreateRequest(int, int);
-
 std::vector<int>Elev_vect;
 
 void DrawElevator (HDC hdc){
@@ -53,7 +45,7 @@ bool isElevHigher(int Floor_height)
 	}
 }
 
-bool ElevatorOpen(int current_Floor)
+void ElevatorOpen(int current_Floor)
 {
 	/*
 	TODO:

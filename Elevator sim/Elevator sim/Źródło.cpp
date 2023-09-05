@@ -1,10 +1,11 @@
 #include <windows.h>
 #include <gdiplus.h>
 #include <vector>
-#include "Draw.h"
 #include <string>
+#include "Draw.h"
 #include "Elevator.h"
-#include<vector>
+#include "Floors.h"
+#include "Humans.h"
 
 
 LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM lparam);
@@ -83,13 +84,16 @@ LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM
 {
 	HDC hdc;
 	PAINTSTRUCT ps;
-
+	
 
 	switch (msg)
 	{
+	case WM_CREATE:
+		
+		
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);
-
+		
 		DrawMain(hdc);
 		EndPaint(hwnd, &ps);
 		return 0;
@@ -97,44 +101,49 @@ LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM
 		{int wmId = LOWORD(param);
 		switch (wmId)
 			{
-			case 1004://pietro 1
-			case 1008://pietro 2
-			case 1012://pietro 3
-			case 1016://pietro 4
+			case 1010://pietro 1
+			case 1020://pietro 2
+			case 1030://pietro 3
+			case 1040://pietro 4
 			{
+				Create_human(int((wmId - 1000)/10), int((wmId-1000)%10));
 				isMoving = true;
 				TargetFloor = 0;
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
 			}
-			case 1000://pietro 0
-			case 1009://pietro 2
-			case 1013://pietro 3
-			case 1017://pietro 4
+			case 1001://pietro 0
+			case 1021://pietro 2
+			case 1031://pietro 3
+			case 1041://pietro 4
+				Create_human(int((wmId - 1000) / 10), int((wmId - 1000) % 10));
 				isMoving = true;
 				TargetFloor = 1;
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
-			case 1001://pietro 0
-			case 1005://pietro 1
-			case 1014://pietro 3
-			case 1018://pietro 4
+			case 1002://pietro 0
+			case 1012://pietro 1
+			case 1032://pietro 3
+			case 1042://pietro 4
+				Create_human(int((wmId - 1000) / 10), int((wmId - 1000) % 10));
 				isMoving = true;
 				TargetFloor = 2;
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
-			case 1002://pietro 0
-			case 1006://pietro 1
-			case 1010://pietro 2
-			case 1019://pietro 4
+			case 1003://pietro 0
+			case 1013://pietro 1
+			case 1023://pietro 2
+			case 1043://pietro 4
+				Create_human(int((wmId - 1000) / 10), int((wmId - 1000) % 10));
 				isMoving = true;
 				TargetFloor = 3;
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
-			case 1003://pietro 0
-			case 1007://pietro 1
-			case 1011://pietro 2
-			case 1015://pietro 3
+			case 1004://pietro 0
+			case 1014://pietro 1
+			case 1024://pietro 2
+			case 1034://pietro 3
+				Create_human(int((wmId - 1000) / 10), int((wmId - 1000) % 10));
 				isMoving = true;
 				TargetFloor = 4;
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
@@ -201,7 +210,8 @@ void ButtonsDraw(HWND hwnd, HINSTANCE instance)
 	int button_x = 0;
 	int button_y = 590-25;
 	int button_size = 25;
-	int button_ID = 1000;
+	const int button_ID_const = 1000;
+	int button_ID_current = button_ID_const;
 
 	for (int currentFloor = 0; currentFloor < 5; currentFloor++)
 	{
@@ -219,50 +229,13 @@ void ButtonsDraw(HWND hwnd, HINSTANCE instance)
 			{
 				continue;
 			}
+			button_ID_current = button_ID_const + (10 * currentFloor) + button_number;
 			hButton = CreateWindowExA(0, "BUTTON", std::to_string(button_number).c_str(),
 				WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
 				button_x, button_y, button_size, button_size,
-				hwnd, (HMENU)button_ID, instance, NULL);
-			button_ID++;
+				hwnd, (HMENU)button_ID_current, instance, NULL);
 			button_y -= 25;
 		}
 		button_y -= 20;
 	}
-	/*
-	for(; button_ID <1020; button_ID++)
-	{
-		if (button_ID % 4 == 0)
-		{
-			if(button_ID==1000)
-			{
-				button_y += 10;
-			}
-			else
-			{
-				button_y += 20;
-			}
-			left = !left;
-			currentFloor--;
-			if (left == true)
-			{
-				button_x = 0;
-			}
-			else
-			{
-				button_x = 755;
-			}
-		}
-		int floorbutton = button_ID % 5;
-		if (floorbutton == currentFloor)
-		{
-			floorbutton++;
-		}
-		hButton = CreateWindowExA(0, "BUTTON", std::to_string(floorbutton).c_str(),
-			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-			button_x, button_y, button_size, button_size,
-			hwnd, (HMENU)button_ID, instance, NULL);
-		button_y += 25;
-	}
-	*/
-
 }

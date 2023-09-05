@@ -29,4 +29,5 @@ void DrawMain(HDC hdc)
 	*/
 	Floor_Draw(hdc);
 	DrawElevator(hdc);
+	Draw_humans_on_floors(hdc);
 }
