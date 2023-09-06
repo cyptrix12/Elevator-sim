@@ -19,8 +19,8 @@ void DrawElevator (HDC hdc){
 
 void UpdateElevatorPosition(HWND hwnd, bool updown)
 {
-	RECT rectangleS = { 800 / 3 + 3, posY - (600 / 5) , 260, 600 / 5 };
-	//InvalidateRect(hwnd, &rectangleS, TRUE);
+	RECT rectangleS = { 800 / 3 + 3, posY - (600 / 5) -5  , (800 / 3) + 3 + 261, posY + 6};
+	InvalidateRect(hwnd, &rectangleS, TRUE);
 	if (updown == false)
 	{
 		posY -= 5;
@@ -29,8 +29,8 @@ void UpdateElevatorPosition(HWND hwnd, bool updown)
 	{
 		posY += 5;
 	}
-	rectangleS = { 800 / 3 + 3, posY - (600 / 5) , 260, 600 / 5 };
-	InvalidateRect(hwnd, NULL, TRUE);
+	
+	InvalidateRect(hwnd, &rectangleS, TRUE);
 }
 
 int ElevatorPosition()
