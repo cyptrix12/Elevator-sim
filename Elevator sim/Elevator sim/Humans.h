@@ -7,7 +7,9 @@
 	struct Human {
 		int Destination;
 		int ID;
+		int Floor;
 		int position[2];
+		int postionDesination;
 		int State = 0;
 		/*
 		0 - going to the line
@@ -18,7 +20,7 @@
 		*/
 		//jakos dopisac jego sprite'a
 	};
-	Human human_S_Create(int Destination, int ID, int postion_x, int position_y);
+	Human human_S_Create(int Destination, int ID,int Floor, int postion_x, int position_y);
 	void DrawHuman(HDC hdc, Human human);
 	
 	

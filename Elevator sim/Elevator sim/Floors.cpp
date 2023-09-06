@@ -1,7 +1,8 @@
 #include <Windows.h>
 #include <gdiplus.h>
-#include "Floors.h"
 #include <vector>
+#include <random>
+#include "Floors.h"
 #include "Humans.h"
 
 std::vector<Human> humans_on_floors[5];
@@ -9,6 +10,20 @@ std::vector<Human> humans_on_floors[5];
 const int Floor_count = 5;
 
 static int Human_id_count = 1;
+
+int getRandomNumber() {
+	// Inicjalizacja generatora liczb losowych
+	std::random_device rd;
+	std::mt19937 gen(rd());
+
+	// Utworzenie rozk³adu równomiernego w zadanym przedziale
+	std::uniform_int_distribution<int> distribution(800 / 3, 800 / 3 * 2 - 80);
+
+	// Generowanie losowej liczby z przedzia³u
+	int randomNumber = distribution(gen);
+
+	return randomNumber;
+}
 
 int Floor_posY(int Floor)
 {
@@ -44,7 +59,7 @@ void Floor_Draw(HDC hdc)
 void Create_human(int Floor, int Destination)
 {
 
-	humans_on_floors[Floor].push_back(human_S_Create(Destination, Human_id_count, Floor_posX(Floor), Floor_posY(Floor)-120));
+	humans_on_floors[Floor].push_back(human_S_Create(Destination, Human_id_count,Floor, Floor_posX(Floor), Floor_posY(Floor)-120));
 	Human_id_count++;
 	/*
 	int n = humans_on_floors[Floor].size();
@@ -72,8 +87,7 @@ void CheckHumanStateFloors(HWND hwnd)
 		{
 			if (humans_on_floors[current_floor][current_human].State == 0)
 			{
-				
-				if (humans_on_floors[current_floor][current_human].position[0] < 800 / 2)
+				if (humans_on_floors[current_floor][current_human].Floor % 2 == 0)
 				{
 					humans_on_floors[current_floor][current_human].position[0] += 5;
 					if (humans_on_floors[current_floor][current_human].position[0] >= ((800 / 3 - 60) - 30 * current_human))
@@ -91,6 +105,30 @@ void CheckHumanStateFloors(HWND hwnd)
 				}
 				RECT humanRect = { humans_on_floors[current_floor][current_human].position[0], humans_on_floors[current_floor][current_human].position[1], humans_on_floors[current_floor][current_human].position[0] + 60, humans_on_floors[current_floor][current_human].position[1] + 75 };
 				InvalidateRect(hwnd, &humanRect, TRUE);
+			}
+			else if (humans_on_floors[current_floor][current_human].State == 1);
+			else if (humans_on_floors[current_floor][current_human].State == 2)
+			{
+				if (humans_on_floors[current_floor][current_human].Floor % 2 == 0)
+				{
+					humans_on_floors[current_floor][current_human].position[0] += 5;
+					if (humans_on_floors[current_floor][current_human].position[0] >= humans_on_floors[current_floor][current_human].postionDesination)
+					{
+						humans_on_floors[current_floor][current_human].State = 3;
+					}
+				}
+				else
+				{
+					humans_on_floors[current_floor][current_human].position[0] -= 5;
+					if (humans_on_floors[current_floor][current_human].position[0] <= humans_on_floors[current_floor][current_human].postionDesination)
+					{
+						humans_on_floors[current_floor][current_human].State = 3;
+					}
+				}
+			}
+			else if (humans_on_floors[current_floor][current_human].State == 3);
+			{
+
 			}
 		}
 	}

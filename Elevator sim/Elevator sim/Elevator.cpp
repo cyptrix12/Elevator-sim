@@ -2,7 +2,7 @@
 #include "Elevator.h"
 #include "Draw.h"
 #include <gdiplus.h>
-#include<vector>
+#include <vector>
 
 
 Request CreateRequest(int, int);

@@ -9,11 +9,12 @@
 
 std::vector<Human> human_vect;
 
-Human human_S_Create(int Destination, int ID, int position_x, int position_y)
+Human human_S_Create(int Destination, int ID,int Floor, int position_x, int position_y)
 {
 	Human human;
 	human.Destination = Destination;
 	human.ID = ID;
+	human.Floor = Floor;
 	human.position[0] = position_x;
 	human.position[1] = position_y + 48;
 	return human;
