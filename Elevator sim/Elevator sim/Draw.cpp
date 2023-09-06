@@ -15,7 +15,7 @@ void DrawMain(HDC hdc)
 
 	//Rect compressionRect(210, 10, myBitmap.GetWidth() / 2,
 		//myBitmap.GetHeight() / 2);
-	gf.Clear(Gdiplus::Color::White); // Clear the off-screen buffer
+	//gf.Clear(Gdiplus::Color::White); // Clear the off-screen buffer
 
 	//osG.DrawImage(&stickman, stickman_scale);
 	/*
@@ -30,4 +30,10 @@ void DrawMain(HDC hdc)
 	Floor_Draw(hdc);
 	DrawElevator(hdc);
 	Draw_humans_on_floors(hdc);
+}
+
+void CheckHumanState(HWND hwnd)
+{
+	//CheckHumanStateElvator();
+	CheckHumanStateFloors(hwnd);
 }

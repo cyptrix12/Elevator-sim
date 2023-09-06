@@ -9,3 +9,5 @@ void Create_human(int Floor, int Destination);
 
 void Draw_humans_on_floors(HDC hdc);
 
+void CheckHumanStateFloors(HWND hwnd);
+

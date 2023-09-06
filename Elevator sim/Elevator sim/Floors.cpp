@@ -63,3 +63,35 @@ void Draw_humans_on_floors(HDC hdc)
 		}
 	}
 }
+
+void CheckHumanStateFloors(HWND hwnd)
+{
+	for (int current_floor = 0; current_floor < 5; current_floor++)
+	{
+		for (int current_human = 0; current_human < humans_on_floors[current_floor].size(); current_human++)
+		{
+			if (humans_on_floors[current_floor][current_human].State == 0)
+			{
+				
+				if (humans_on_floors[current_floor][current_human].position[0] < 800 / 2)
+				{
+					humans_on_floors[current_floor][current_human].position[0] += 5;
+					if (humans_on_floors[current_floor][current_human].position[0] >= ((800 / 3 - 60) - 30 * current_human))
+					{
+						humans_on_floors[current_floor][current_human].State = 1;
+					}
+				}
+				else
+				{
+					humans_on_floors[current_floor][current_human].position[0] -= 5;
+					if (humans_on_floors[current_floor][current_human].position[0] <= (800 / 3 * 2 + 30 * current_human))
+					{
+						humans_on_floors[current_floor][current_human].State = 1;
+					}
+				}
+				RECT humanRect = { humans_on_floors[current_floor][current_human].position[0], humans_on_floors[current_floor][current_human].position[1], humans_on_floors[current_floor][current_human].position[0] + 60, humans_on_floors[current_floor][current_human].position[1] + 75 };
+				InvalidateRect(hwnd, &humanRect, TRUE);
+			}
+		}
+	}
+}

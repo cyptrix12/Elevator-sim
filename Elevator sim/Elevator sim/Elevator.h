@@ -8,10 +8,11 @@ struct Request {
 };
 
 void DrawElevator(HDC hdc);
-void UpdateElevatorPosition(bool updown);
+void UpdateElevatorPosition(HWND hwnd, bool updown);
 int ElevatorPosition();
 bool isElevHigher(int Floor_height);
 void ElevatorOpen(int current_Floor);
+void CheckHumanStateElvator();
 
 
 static int posY = 590;

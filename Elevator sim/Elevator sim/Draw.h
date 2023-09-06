@@ -5,3 +5,5 @@
 
 
 void DrawMain(HDC hdc);
+
+void CheckHumanState(HWND hwnd);

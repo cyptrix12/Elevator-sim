@@ -154,6 +154,7 @@ LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM
 	case WM_TIMER:
 		if (param == timerID)
 		{
+			CheckHumanState(hwnd);
 			
 			if (isMoving == true) {
 				if (ElevatorPosition() == Floors_Positions[TargetFloor])
@@ -162,8 +163,8 @@ LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM
 				}
 				else
 				{
-					UpdateElevatorPosition(updown);
-					InvalidateRect(hwnd, NULL, FALSE); // Request a repaint
+					UpdateElevatorPosition(hwnd, updown);
+					//InvalidateRect(hwnd, NULL, FALSE); // Request a repaint
 				}
 			}
 			

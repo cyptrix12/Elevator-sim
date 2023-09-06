@@ -8,6 +8,7 @@
 Request CreateRequest(int, int);
 std::vector<int>Elev_vect;
 
+
 void DrawElevator (HDC hdc){
 	Gdiplus::Graphics gf(hdc);
 	Gdiplus::Pen pen(Gdiplus::Color(255, 255, 0, 0));
@@ -16,8 +17,10 @@ void DrawElevator (HDC hdc){
 	gf.DrawRectangle(&pen, rectangle);
 }
 
-void UpdateElevatorPosition(bool updown)
+void UpdateElevatorPosition(HWND hwnd, bool updown)
 {
+	RECT rectangleS = { 800 / 3 + 3, posY - (600 / 5) , 260, 600 / 5 };
+	//InvalidateRect(hwnd, &rectangleS, TRUE);
 	if (updown == false)
 	{
 		posY -= 5;
@@ -26,6 +29,8 @@ void UpdateElevatorPosition(bool updown)
 	{
 		posY += 5;
 	}
+	rectangleS = { 800 / 3 + 3, posY - (600 / 5) , 260, 600 / 5 };
+	InvalidateRect(hwnd, NULL, TRUE);
 }
 
 int ElevatorPosition()
