@@ -13,6 +13,3 @@ int ElevatorPosition();
 bool isElevHigher(int Floor_height);
 void ElevatorOpen(int current_Floor);
 void CheckHumanStateElvator();
-
-
-static int posY = 590;

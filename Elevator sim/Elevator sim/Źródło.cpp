@@ -108,7 +108,7 @@ LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM
 			{
 				Create_human(int((wmId - 1000)/10), int((wmId-1000)%10));
 				isMoving = true;
-				TargetFloor = 0;
+				TargetFloor = ((wmId - 1000) % 10);
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
 			}
@@ -118,7 +118,7 @@ LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM
 			case 1041://pietro 4
 				Create_human(int((wmId - 1000) / 10), int((wmId - 1000) % 10));
 				isMoving = true;
-				TargetFloor = 1;
+				TargetFloor = ((wmId - 1000) % 10);
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
 			case 1002://pietro 0
@@ -127,7 +127,7 @@ LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM
 			case 1042://pietro 4
 				Create_human(int((wmId - 1000) / 10), int((wmId - 1000) % 10));
 				isMoving = true;
-				TargetFloor = 2;
+				TargetFloor = ((wmId - 1000) % 10);
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
 			case 1003://pietro 0
@@ -136,7 +136,7 @@ LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM
 			case 1043://pietro 4
 				Create_human(int((wmId - 1000) / 10), int((wmId - 1000) % 10));
 				isMoving = true;
-				TargetFloor = 3;
+				TargetFloor = ((wmId - 1000) % 10);
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
 			case 1004://pietro 0
@@ -145,7 +145,7 @@ LRESULT CALLBACK WindowProcessMassages(HWND hwnd, UINT msg, WPARAM param, LPARAM
 			case 1034://pietro 3
 				Create_human(int((wmId - 1000) / 10), int((wmId - 1000) % 10));
 				isMoving = true;
-				TargetFloor = 4;
+				TargetFloor = ((wmId - 1000) % 10);
 				updown = isElevHigher(Floors_Positions[TargetFloor]);
 				break;
 			}

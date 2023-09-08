@@ -1,8 +1,3 @@
-﻿  Draw.cpp
-  Floors.cpp
+﻿  Floors.cpp
 D:\projekty\projekt 4\Elevator-sim\Elevator sim\Elevator sim\Floors.cpp(129,71): warning C4390: ";": znaleziono kontrolowaną pustą instrukcję; czy to było zamierzone?
-  Humans.cpp
-  Źródło.cpp
-D:\projekty\projekt 4\Elevator-sim\Elevator sim\Elevator sim\Źródło.cpp(237,35): warning C4312: "typ rzutowania": konwersja z "int" na "HMENU" jest większej wielkości
-  Generowanie kodu...
   Elevator sim.vcxproj -> D:\projekty\projekt 4\Elevator-sim\Elevator sim\x64\Debug\Elevator sim.exe

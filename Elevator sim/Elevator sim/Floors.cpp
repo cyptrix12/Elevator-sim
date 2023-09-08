@@ -103,7 +103,7 @@ void CheckHumanStateFloors(HWND hwnd)
 						humans_on_floors[current_floor][current_human].State = 1;
 					}
 				}
-				RECT humanRect = { humans_on_floors[current_floor][current_human].position[0], humans_on_floors[current_floor][current_human].position[1], humans_on_floors[current_floor][current_human].position[0] + 60, humans_on_floors[current_floor][current_human].position[1] + 75 };
+				RECT humanRect = { humans_on_floors[current_floor][current_human].position[0] + 10, humans_on_floors[current_floor][current_human].position[1], humans_on_floors[current_floor][current_human].position[0] + 55, humans_on_floors[current_floor][current_human].position[1] + 75 };
 				InvalidateRect(hwnd, &humanRect, TRUE);
 			}
 			else if (humans_on_floors[current_floor][current_human].State == 1);

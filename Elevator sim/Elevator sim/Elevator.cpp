@@ -6,7 +6,10 @@
 
 
 Request CreateRequest(int, int);
+
 std::vector<int>Elev_vect;
+
+static int posY = 590;
 
 
 void DrawElevator (HDC hdc){
