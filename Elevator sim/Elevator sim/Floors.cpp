@@ -16,10 +16,9 @@ int getRandomNumber() {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 
-	// Utworzenie rozk³adu równomiernego w zadanym przedziale
 	std::uniform_int_distribution<int> distribution(800 / 3, 800 / 3 * 2 - 80);
 
-	// Generowanie losowej liczby z przedzia³u
+	// Generowanie losowej liczby z przedziaï¿½u
 	int randomNumber = distribution(gen);
 
 	return randomNumber;
@@ -129,6 +128,32 @@ void CheckHumanStateFloors(HWND hwnd)
 			else if (humans_on_floors[current_floor][current_human].State == 3);
 			{
 
+			}
+		}
+	}
+}
+
+bool isSomeoneOnTheFloor(int Floor)
+{
+	return (humans_on_floors[Floor].size() > 0) ? true : false;
+}
+
+void CheckDestination(int current_floor, bool updown)
+{
+	for (int current_human = 0; current_human < humans_on_floors[current_floor].size(); current_human++)
+	{
+		if (updown == true)
+		{
+			if (humans_on_floors[current_floor][current_human].Destination > current_floor)
+			{
+				humans_on_floors[current_floor][current_human].State = 2;
+			}
+		}
+		else
+		{
+			if (humans_on_floors[current_floor][current_human].Destination < current_floor)
+			{
+				humans_on_floors[current_floor][current_human].State = 2;
 			}
 		}
 	}
