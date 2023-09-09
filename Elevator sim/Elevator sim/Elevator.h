@@ -19,7 +19,7 @@ struct Elavator
 void DrawElevator(HDC hdc);
 void UpdateElevatorPosition(HWND hwnd, bool updown);
 int ElevatorPosition();
-bool isElevHigher(int Floor_height);
+bool isElevHigher(int Floor);
 void ElevatorOpen(int current_Floor);
 void CheckHumanStateElvator();
 void Add_human_to_elavator(Human human);

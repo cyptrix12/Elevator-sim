@@ -92,13 +92,10 @@ void Add_human_to_elavator(Human human)
 	humans_in_elavator.push_back(human);
 }
 
+/*
+
 void Elavator_logic(HWND hwnd)
 {
-	if (elavator.stop == true)
-	{
-		//sprawdz czy dalej powinna stac
-		//return
-	}   
 	int current_floor = -1;
 	for (int i = 0; i < 5; i++)
 	{
@@ -108,6 +105,13 @@ void Elavator_logic(HWND hwnd)
 			current_floor = i;
 		}
 	}
+	
+	if (elavator.stop == true)
+	{
+		//sprawdz czy dalej powinna stac
+		//return
+		
+	}
 	if (elavator.stop == false)
 	{
 		UpdateElevatorPosition(hwnd, elavator.updown);
@@ -115,13 +119,7 @@ void Elavator_logic(HWND hwnd)
 	}
 	else
 	{
-		//1. czy ktos jest na pietrze
-		//	jesli tak to:
-		//	jesli chce jechac w dobrym kierunku to po pierwsze sprawdzic czy poszerza on destination a po drugie dodac go do windy
-		//  jesli nie chce w dobrym kierunku to wyjebane 
-		//2. czy ktos jest w windzie kto chce wysiasc na tym pietrze
-		//
-
+		
 		if (isSomeoneOnTheFloor(current_floor) == true)
 		{
 			if(current_floor != elavator.Destination)
@@ -134,6 +132,14 @@ void Elavator_logic(HWND hwnd)
 				//Destination = -1;????
 			}
 		}
+
+		//1. czy ktos jest na pietrze
+		//	jesli tak to:
+		//	jesli chce jechac w dobrym kierunku to po pierwsze sprawdzic czy poszerza on destination a po drugie dodac go do windy
+		//  jesli nie chce w dobrym kierunku to wyjebane 
+		//2. czy ktos jest w windzie kto chce wysiasc na tym pietrze
+		//
+
 		if (humans_in_elavator.size() != 0)
 		{
 			for (int current_human = 0; current_human < humans_in_elavator.size(); current_human++)
@@ -141,8 +147,23 @@ void Elavator_logic(HWND hwnd)
 				if (humans_in_elavator[current_human].Destination == current_floor)
 				{
 					humans_in_elavator[current_human].State = 4;
+					add_human_to_floor(humans_in_elavator[current_human]);
+					if (current_human >= 0 && current_human < humans_in_elavator.size())
+					{
+						humans_in_elavator.erase(humans_in_elavator.begin() + current_human);
+					}
 				}
 			}
+		}
+		if (isSomeoneGoingToTheElavator() == true)
+		{
+			return;
+		}
+		else
+		{
+			elavator.stop = false;
+			UpdateElevatorPosition(hwnd, elavator.updown);
+			return;
 		}
 		if (humans_in_elavator.size() == 0)
 		{
@@ -150,3 +171,5 @@ void Elavator_logic(HWND hwnd)
 		}
 	}
 }
+
+*/

@@ -1,8 +1,4 @@
-﻿  Draw.cpp
-  Elevator.cpp
-  Floors.cpp
-C:\Users\cypri\programowanie\projekt 4\projekt-4\Elevator sim\Elevator sim\Floors.cpp(128,71): warning C4390: ";": znaleziono kontrolowaną pustą instrukcję; czy to było zamierzone?
-  Źródło.cpp
-C:\Users\cypri\programowanie\projekt 4\projekt-4\Elevator sim\Elevator sim\Źródło.cpp(237,11): warning C4312: "typ rzutowania": konwersja z "int" na "HMENU" jest większej wielkości
-  Generowanie kodu...
-  Elevator sim.vcxproj -> C:\Users\cypri\programowanie\projekt 4\projekt-4\Elevator sim\x64\Debug\Elevator sim.exe
+﻿  Źródło.cpp
+D:\projekty\projekt 4\Elevator-sim\Elevator sim\Elevator sim\Źródło.cpp(237,35): warning C4312: "typ rzutowania": konwersja z "int" na "HMENU" jest większej wielkości
+D:\projekty\projekt 4\Elevator-sim\Elevator sim\Elevator sim\Źródło.cpp(179): warning C4715: "WindowProcessMassages”: niewszystkie ścieżki kodu zwracają wartość
+  Elevator sim.vcxproj -> D:\projekty\projekt 4\Elevator-sim\Elevator sim\x64\Debug\Elevator sim.exe

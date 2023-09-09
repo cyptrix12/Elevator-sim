@@ -3,6 +3,7 @@
 #include <vector>
 #include <random>
 #include "Floors.h"
+#include "Elevator.h"
 #include "Humans.h"
 
 std::vector<Human> humans_on_floors[5];
@@ -11,18 +12,7 @@ const int Floor_count = 5;
 
 static int Human_id_count = 1;
 
-int getRandomNumber() {
-	// Inicjalizacja generatora liczb losowych
-	std::random_device rd;
-	std::mt19937 gen(rd());
 
-	std::uniform_int_distribution<int> distribution(800 / 3, 800 / 3 * 2 - 80);
-
-	// Generowanie losowej liczby z przedzia�u
-	int randomNumber = distribution(gen);
-
-	return randomNumber;
-}
 
 int Floor_posY(int Floor)
 {
@@ -65,6 +55,11 @@ void Create_human(int Floor, int Destination)
 	humans_on_floors[Floor][humans_on_floors[Floor].size() - 1];
 	*/
 	
+}
+
+void add_human_to_floor(Human human)
+{
+	humans_on_floors[human.Destination].push_back(human);
 }
 
 void Draw_humans_on_floors(HDC hdc)
@@ -114,6 +109,11 @@ void CheckHumanStateFloors(HWND hwnd)
 					if (humans_on_floors[current_floor][current_human].position[0] >= humans_on_floors[current_floor][current_human].postionDesination)
 					{
 						humans_on_floors[current_floor][current_human].State = 3;
+						Add_human_to_elavator(humans_on_floors[current_floor][current_human]);
+						if (current_human >= 0 && current_human < humans_on_floors[current_floor].size())
+						{
+							humans_on_floors[current_floor].erase(humans_on_floors[current_floor].begin() + current_human);
+						}
 					}
 				}
 				else
@@ -122,12 +122,38 @@ void CheckHumanStateFloors(HWND hwnd)
 					if (humans_on_floors[current_floor][current_human].position[0] <= humans_on_floors[current_floor][current_human].postionDesination)
 					{
 						humans_on_floors[current_floor][current_human].State = 3;
+						Add_human_to_elavator(humans_on_floors[current_floor][current_human]);
+						if (current_human >= 0 && current_human < humans_on_floors[current_floor].size()) 
+						{
+							humans_on_floors[current_floor].erase(humans_on_floors[current_floor].begin() + current_human);
+						}
 					}
 				}
 			}
-			else if (humans_on_floors[current_floor][current_human].State == 3);
+			else if (humans_on_floors[current_floor][current_human].State == 4)
 			{
-
+				if (humans_on_floors[current_floor][current_human].Destination % 2 == 0)
+				{
+					humans_on_floors[current_floor][current_human].position[1] -= 5;
+					if (humans_on_floors[current_floor][current_human].position[1] < 10)
+					{
+						if (current_human >= 0 && current_human < humans_on_floors[current_floor].size())
+						{
+							humans_on_floors[current_floor].erase(humans_on_floors[current_floor].begin() + current_human);
+						}
+					}
+				}
+				else
+				{
+					humans_on_floors[current_floor][current_human].position[1] += 5;
+					if (humans_on_floors[current_floor][current_human].position[1] > 800)
+					{
+						if (current_human >= 0 && current_human < humans_on_floors[current_floor].size())
+						{
+							humans_on_floors[current_floor].erase(humans_on_floors[current_floor].begin() + current_human);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -136,6 +162,21 @@ void CheckHumanStateFloors(HWND hwnd)
 bool isSomeoneOnTheFloor(int Floor)
 {
 	return (humans_on_floors[Floor].size() > 0) ? true : false;
+}
+
+bool isSomeoneGoingToTheElavator()
+{
+	for (int current_floor = 0; current_floor < 5; current_floor++)
+	{
+		for (int current_human = 0; current_human < humans_on_floors[current_floor].size(); current_human++)
+		{
+			if (humans_on_floors[current_floor][current_human].State == 2)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 void CheckDestination(int current_floor, bool updown)

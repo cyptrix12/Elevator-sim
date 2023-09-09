@@ -22,7 +22,7 @@
 	};
 	Human human_S_Create(int Destination, int ID,int Floor, int postion_x, int position_y);
 	void DrawHuman(HDC hdc, Human human);
-	
+	int getRandomNumber();
 	
 
 
