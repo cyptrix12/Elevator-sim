@@ -10,7 +10,7 @@ struct Request {
 
 struct Elavator
 {
-	int Destination;
+	int Destination = -1;
 	bool updown;
 	bool stop;
 
@@ -23,3 +23,4 @@ bool isElevHigher(int Floor);
 void ElevatorOpen(int current_Floor);
 void CheckHumanStateElvator();
 void Add_human_to_elavator(Human human);
+void Elavator_logic(HWND hwnd);

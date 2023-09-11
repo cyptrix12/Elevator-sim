@@ -35,5 +35,6 @@ void DrawMain(HDC hdc)
 void CheckHumanState(HWND hwnd)
 {
 	//CheckHumanStateElvator();
+	Elavator_logic(hwnd);
 	CheckHumanStateFloors(hwnd);
 }

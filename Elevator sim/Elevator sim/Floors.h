@@ -21,3 +21,5 @@ bool isSomeoneOnTheFloor(int Floor);
 bool isSomeoneGoingToTheElavator();
 
 void CheckDestination(int current_floor, bool updown);
+
+int LookForDestination(int currentElevatorFloor, bool updown); // 1 - good destination 2 - down 0 - none

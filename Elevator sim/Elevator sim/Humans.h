@@ -11,6 +11,7 @@
 		int position[2];
 		int postionDesination;
 		int State = 0;
+		int weight = 70;
 		/*
 		0 - going to the line
 		1 - waiting for the elevator

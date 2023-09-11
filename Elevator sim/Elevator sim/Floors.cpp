@@ -199,3 +199,24 @@ void CheckDestination(int current_floor, bool updown)
 		}
 	}
 }
+int LookForDestination(int currentElevatorFloor, bool updown)
+{
+	bool destination_for_up = false;
+	bool destination_for_down = false;
+	for (int current_floor = 0; current_floor < 5; current_floor++)
+	{
+		for (int current_human = 0; current_human < humans_on_floors[current_floor].size(); current_human++)
+		{
+			if (humans_on_floors[current_floor][current_human].Destination > currentElevatorFloor && humans_on_floors[current_floor][current_human].Floor >= currentElevatorFloor)
+				destination_for_up = true;
+			else if (humans_on_floors[current_floor][current_human].Destination < currentElevatorFloor && humans_on_floors[current_floor][current_human].Floor <= currentElevatorFloor)
+				destination_for_down = true;
+		}
+	}
+	if (destination_for_up == true)
+		return 1;
+	else if (destination_for_down == true)
+		return 2;
+	else
+		return 0;
+}
