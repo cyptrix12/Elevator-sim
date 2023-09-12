@@ -84,6 +84,8 @@ void CheckHumanStateFloors(HWND hwnd)
 				if (humans_on_floors[current_floor][current_human].Floor % 2 == 0)
 				{
 					humans_on_floors[current_floor][current_human].position[0] += 5;
+					RECT humanRect = { humans_on_floors[current_floor][current_human].position[0] + 10, humans_on_floors[current_floor][current_human].position[1], humans_on_floors[current_floor][current_human].position[0] + 55, humans_on_floors[current_floor][current_human].position[1] + 75 };
+					InvalidateRect(hwnd, &humanRect, TRUE);
 					if (humans_on_floors[current_floor][current_human].position[0] >= ((800 / 3 - 60) - 30 * current_human))
 					{
 						humans_on_floors[current_floor][current_human].State = 1;
@@ -92,13 +94,15 @@ void CheckHumanStateFloors(HWND hwnd)
 				else
 				{
 					humans_on_floors[current_floor][current_human].position[0] -= 5;
+					RECT humanRect = { humans_on_floors[current_floor][current_human].position[0] + 10, humans_on_floors[current_floor][current_human].position[1], humans_on_floors[current_floor][current_human].position[0] + 55, humans_on_floors[current_floor][current_human].position[1] + 75 };
+					InvalidateRect(hwnd, &humanRect, TRUE);
 					if (humans_on_floors[current_floor][current_human].position[0] <= (800 / 3 * 2 + 30 * current_human))
 					{
 						humans_on_floors[current_floor][current_human].State = 1;
+						current_human--;
 					}
 				}
-				RECT humanRect = { humans_on_floors[current_floor][current_human].position[0] + 10, humans_on_floors[current_floor][current_human].position[1], humans_on_floors[current_floor][current_human].position[0] + 55, humans_on_floors[current_floor][current_human].position[1] + 75 };
-				InvalidateRect(hwnd, &humanRect, TRUE);
+
 			}
 			else if (humans_on_floors[current_floor][current_human].State == 1);
 			else if (humans_on_floors[current_floor][current_human].State == 2)
@@ -106,6 +110,8 @@ void CheckHumanStateFloors(HWND hwnd)
 				if (humans_on_floors[current_floor][current_human].Floor % 2 == 0)
 				{
 					humans_on_floors[current_floor][current_human].position[0] += 5;
+					RECT humanRect = { humans_on_floors[current_floor][current_human].position[0] + 10, humans_on_floors[current_floor][current_human].position[1], humans_on_floors[current_floor][current_human].position[0] + 55, humans_on_floors[current_floor][current_human].position[1] + 75 };
+					InvalidateRect(hwnd, &humanRect, TRUE);
 					if (humans_on_floors[current_floor][current_human].position[0] >= humans_on_floors[current_floor][current_human].postionDesination)
 					{
 						humans_on_floors[current_floor][current_human].State = 3;
@@ -113,12 +119,15 @@ void CheckHumanStateFloors(HWND hwnd)
 						if (current_human >= 0 && current_human < humans_on_floors[current_floor].size())
 						{
 							humans_on_floors[current_floor].erase(humans_on_floors[current_floor].begin() + current_human);
+							current_human--;
 						}
 					}
 				}
 				else
 				{
 					humans_on_floors[current_floor][current_human].position[0] -= 5;
+					RECT humanRect = { humans_on_floors[current_floor][current_human].position[0] + 10, humans_on_floors[current_floor][current_human].position[1], humans_on_floors[current_floor][current_human].position[0] + 55, humans_on_floors[current_floor][current_human].position[1] + 75 };
+					InvalidateRect(hwnd, &humanRect, TRUE);
 					if (humans_on_floors[current_floor][current_human].position[0] <= humans_on_floors[current_floor][current_human].postionDesination)
 					{
 						humans_on_floors[current_floor][current_human].State = 3;
@@ -126,31 +135,40 @@ void CheckHumanStateFloors(HWND hwnd)
 						if (current_human >= 0 && current_human < humans_on_floors[current_floor].size()) 
 						{
 							humans_on_floors[current_floor].erase(humans_on_floors[current_floor].begin() + current_human);
+							current_human--;
 						}
 					}
+
 				}
+
 			}
 			else if (humans_on_floors[current_floor][current_human].State == 4)
 			{
 				if (humans_on_floors[current_floor][current_human].Destination % 2 == 0)
 				{
-					humans_on_floors[current_floor][current_human].position[1] -= 5;
-					if (humans_on_floors[current_floor][current_human].position[1] < 10)
+					humans_on_floors[current_floor][current_human].position[0] -= 5;
+					RECT humanRect = { humans_on_floors[current_floor][current_human].position[0] + 10, humans_on_floors[current_floor][current_human].position[1], humans_on_floors[current_floor][current_human].position[0] + 55, humans_on_floors[current_floor][current_human].position[1] + 75 };
+					InvalidateRect(hwnd, &humanRect, TRUE);
+					if (humans_on_floors[current_floor][current_human].position[0] < 10)
 					{
 						if (current_human >= 0 && current_human < humans_on_floors[current_floor].size())
 						{
 							humans_on_floors[current_floor].erase(humans_on_floors[current_floor].begin() + current_human);
+							current_human--;
 						}
 					}
 				}
 				else
 				{
-					humans_on_floors[current_floor][current_human].position[1] += 5;
-					if (humans_on_floors[current_floor][current_human].position[1] > 800)
+					humans_on_floors[current_floor][current_human].position[0] += 5;
+					RECT humanRect = { humans_on_floors[current_floor][current_human].position[0] + 10, humans_on_floors[current_floor][current_human].position[1], humans_on_floors[current_floor][current_human].position[0] + 55, humans_on_floors[current_floor][current_human].position[1] + 75 };
+					InvalidateRect(hwnd, &humanRect, TRUE);
+					if (humans_on_floors[current_floor][current_human].position[0] > 800)
 					{
 						if (current_human >= 0 && current_human < humans_on_floors[current_floor].size())
 						{
 							humans_on_floors[current_floor].erase(humans_on_floors[current_floor].begin() + current_human);
+							current_human--;
 						}
 					}
 				}
@@ -219,4 +237,22 @@ int LookForDestination(int currentElevatorFloor, bool updown)
 		return 2;
 	else
 		return 0;
+}
+
+bool isSomeoneGettingOut()
+{
+	for (int current_floor = 0; current_floor < 5; current_floor++)
+	{
+		for (int current_human = 0; current_human < humans_on_floors[current_floor].size(); current_human++)
+		{
+			if (humans_on_floors[current_floor][current_human].State == 4)
+			{
+				if (humans_on_floors[current_floor][current_human].position[0] >= 800 / 3 && humans_on_floors[current_floor][current_human].position[0] <= 800 * 2 / 3)
+				{
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }

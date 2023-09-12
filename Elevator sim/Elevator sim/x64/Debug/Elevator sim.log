@@ -1,7 +1,6 @@
 ﻿  Draw.cpp
   Elevator.cpp
   Floors.cpp
-  Humans.cpp
   Źródło.cpp
 D:\projekty\projekt 4\Elevator-sim\Elevator sim\Elevator sim\Źródło.cpp(238,35): warning C4312: "typ rzutowania": konwersja z "int" na "HMENU" jest większej wielkości
   Generowanie kodu...

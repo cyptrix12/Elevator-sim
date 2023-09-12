@@ -29,13 +29,21 @@ void UpdateElevatorPosition(HWND hwnd, bool updown)
 {
 	RECT rectangleS = { 800 / 3 + 3, posY - (600 / 5) -5  , (800 / 3) + 3 + 261, posY + 6};
 	InvalidateRect(hwnd, &rectangleS, TRUE);
-	if (updown == false)
+	if (updown == true)
 	{
 		posY -= 5;
+		for (int current_human = 0; current_human < humans_in_elavator.size(); current_human++)
+		{
+			humans_in_elavator[current_human].position[1] -= 5;
+		}
 	}
 	else
 	{
 		posY += 5;
+		for (int current_human = 0; current_human < humans_in_elavator.size(); current_human++)
+		{
+			humans_in_elavator[current_human].position[1] += 5;
+		}
 	}
 	
 	InvalidateRect(hwnd, &rectangleS, TRUE);
@@ -122,6 +130,10 @@ void Elavator_logic(HWND hwnd)
 		4. czy ktos jest w danym kierunku ale by chcial w drugi kierunek
 		5. czy jest ktos w zlym kierunku 
 		*/
+		if (isSomeoneGettingOut() == true)
+		{
+			return;
+		}
 		if (humans_in_elavator.size() != 0)
 		{
 			for (int current_human = 0; current_human < humans_in_elavator.size(); current_human++)
@@ -192,5 +204,13 @@ void Elavator_logic(HWND hwnd)
 		{
 			elevator.stop = false;
 		}
+	}
+}
+
+void DrawPoepleInElevator(HDC hdc)
+{
+	for (int current_human = 0; current_human < humans_in_elavator.size(); current_human++)
+	{
+		DrawHuman(hdc, humans_in_elavator[current_human]);
 	}
 }

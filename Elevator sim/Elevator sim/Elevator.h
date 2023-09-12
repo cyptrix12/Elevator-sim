@@ -11,7 +11,7 @@ struct Request {
 struct Elavator
 {
 	int Destination = -1;
-	bool updown;
+	bool updown = true;
 	bool stop;
 
 };
@@ -24,3 +24,4 @@ void ElevatorOpen(int current_Floor);
 void CheckHumanStateElvator();
 void Add_human_to_elavator(Human human);
 void Elavator_logic(HWND hwnd);
+void DrawPoepleInElevator(HDC hdc);

@@ -28,8 +28,9 @@ void DrawMain(HDC hdc)
 	gf.DrawLine(&pen, 800, 600 / 5 * 4, 800 / 3 * 2, 600 / 5 * 4);
 	*/
 	Floor_Draw(hdc);
-	DrawElevator(hdc);
 	Draw_humans_on_floors(hdc);
+	DrawElevator(hdc);
+	DrawPoepleInElevator(hdc);
 }
 
 void CheckHumanState(HWND hwnd)
