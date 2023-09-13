@@ -109,6 +109,16 @@ void Add_human_to_elavator(Human human)
 
 void Elavator_logic(HWND hwnd)
 {
+	if (humans_in_elavator.size() > 7)
+	{
+		if (isSomeoneGoingToTheElavator() == true)
+		{
+			return;
+		}
+		ElevatorDrop(hwnd);
+		return;
+	}
+
 	int current_floor = -1;
 	elevator.stop = false;
 	for (int i = 0; i < 5; i++)
@@ -264,5 +274,18 @@ void UpdateMassCounter(HWND hwnd)
 {
 	RECT rectangleS = { 800 / 3 + 3, posY - (600 / 5) - 5  , (800 / 3) + 3 + 261, posY + 6 };
 	rectangleS = { 600, 0 , 800, 50 };
+	InvalidateRect(hwnd, &rectangleS, TRUE);
+}
+
+void ElevatorDrop(HWND hwnd)
+{
+	RECT rectangleS = { 800 / 3 + 3, posY - (600 / 5) - 5  , (800 / 3) + 3 + 261, posY + 6 };
+	InvalidateRect(hwnd, &rectangleS, TRUE);
+	posY += 10;
+	for (int current_human = 0; current_human < humans_in_elavator.size(); current_human++)
+	{
+		humans_in_elavator[current_human].position[1] += 10;
+	}
+	rectangleS = { 800 / 3 + 3, posY - (600 / 5) - 5  , (800 / 3) + 3 + 261, posY + 6 };
 	InvalidateRect(hwnd, &rectangleS, TRUE);
 }

@@ -27,3 +27,4 @@ void Elavator_logic(HWND hwnd);
 void DrawPoepleInElevator(HDC hdc);
 void DrawMassCounter(HDC hdc);
 void UpdateMassCounter(HWND hwnd);
+void ElevatorDrop(HWND hwnd);
