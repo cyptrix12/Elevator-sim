@@ -50,11 +50,6 @@ void Create_human(int Floor, int Destination)
 
 	humans_on_floors[Floor].push_back(human_S_Create(Destination, Human_id_count,Floor, Floor_posX(Floor), Floor_posY(Floor)-120));
 	Human_id_count++;
-	/*
-	int n = humans_on_floors[Floor].size();
-	humans_on_floors[Floor][humans_on_floors[Floor].size() - 1];
-	*/
-	
 }
 
 void add_human_to_floor(Human human)

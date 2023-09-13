@@ -8,9 +8,6 @@
 #include "Humans.h"
 
 
-
-
-std::vector<int>Elev_vect;
 std::vector<Human> humans_in_elavator;
 
 Elavator elevator;
@@ -71,27 +68,6 @@ bool isElevHigher(int Floor)
 	}
 }
 
-void ElevatorOpen(int current_Floor)
-{
-	/*
-	TODO:
-	1. sprawdzic czy w windzie jest ktos kto tu chce wysiasc
-	2. sprawdzic czy na tym pietrze jest ktos kto chce wsiasc w danym kierunku
-	*/
-
-	for (auto it = Elev_vect.begin(); it != Elev_vect.end(); ++it) {
-		if (*it == current_Floor) {
-
-			//tutaj funkcja zeby te ludki powychodzily
-			
-			it = Elev_vect.erase(it); 
-			if (it != Elev_vect.begin()) {
-				--it;
-			}
-		}
-	}
-}
-
 Request CreateRequest(int button_floor, int button_destination)
 {
 	Request request;
@@ -135,7 +111,7 @@ void Elavator_logic(HWND hwnd)
 		UpdateElevatorPosition(hwnd, elevator.updown);
 		return;
 	}
-	else // od tego miejsca rob co uwazasz za sluszne. imo bedzie trzeba usunac elevator.destination bo useless sie wydaje
+	else 
 	{
 
 		/*
@@ -161,7 +137,6 @@ void Elavator_logic(HWND hwnd)
 					UpdateMassCounter(hwnd);
 				}
 			}
-			// tera znowu wywolac tego fora i sprawdzic czy ktos dalej chce jechac w tym kierunku. mozna do tego zrobic osobna bool funkcje
 		}
 		if (isSomeoneGettingOut() == true)
 		{
@@ -179,7 +154,6 @@ void Elavator_logic(HWND hwnd)
 				UpdateElevatorPosition(hwnd, elevator.updown);
 				return;
 			}
-			//ta funkcja LookForDestination do przeksztalcenia jest lekkiego ale zamysl imo git
 			int destination_buffer = LookForDestination(current_floor, elevator.updown);
 			switch (destination_buffer)
 			{
@@ -243,20 +217,6 @@ bool IsThereAPlace()
 
 void DrawMassCounter(HDC hdc)
 {
-	/*
-	Gdiplus::Graphics gf(hdc);
-	Gdiplus::FontFamily fontFamily(L"Arial");
-	Gdiplus::Font font(&fontFamily, 16, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
-	Gdiplus::SolidBrush brush(Gdiplus::Color(255, 255, 0));
-
-	Gdiplus::StringFormat stringFormat;
-
-	stringFormat.SetAlignment(Gdiplus::StringAlignmentFar);
-
-	Gdiplus::RectF layoutRect(650, 10, 150, 30);
-	std::wstring textToDisplay = L"Hello, World!";
-	gf.DrawString((WCHAR*)(std::to_wstring(humans_in_elavator.size() * 70) + L" kg").c_str(), -1, &font, &stringFormat, &brush);
-	*/
 	Gdiplus::Graphics gf(hdc);
 	Gdiplus::SolidBrush blackBrush(Gdiplus::Color(255, 0, 0, 0));
 	Gdiplus::Font strFont(L"Arial", 13, 1);
