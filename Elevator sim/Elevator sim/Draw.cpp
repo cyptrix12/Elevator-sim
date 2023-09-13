@@ -31,6 +31,7 @@ void DrawMain(HDC hdc)
 	Draw_humans_on_floors(hdc);
 	DrawElevator(hdc);
 	DrawPoepleInElevator(hdc);
+	DrawMassCounter(hdc);
 }
 
 void CheckHumanState(HWND hwnd)

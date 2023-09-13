@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include <gdiplus.h>
 #include <vector>
+#include <string>
 #include "Draw.h"
 #include "Elevator.h"
 #include "Floors.h"
@@ -31,6 +32,8 @@ void UpdateElevatorPosition(HWND hwnd, bool updown)
 	InvalidateRect(hwnd, &rectangleS, TRUE);
 	if (updown == true)
 	{
+		if (posY <= 110)
+			elevator.updown = false;
 		posY -= 5;
 		for (int current_human = 0; current_human < humans_in_elavator.size(); current_human++)
 		{
@@ -39,6 +42,8 @@ void UpdateElevatorPosition(HWND hwnd, bool updown)
 	}
 	else
 	{
+		if (posY >= 590)
+			elevator.updown = true;
 		posY += 5;
 		for (int current_human = 0; current_human < humans_in_elavator.size(); current_human++)
 		{
@@ -120,7 +125,7 @@ void Elavator_logic(HWND hwnd)
 		UpdateElevatorPosition(hwnd, elevator.updown);
 		return;
 	}
-	else // od tego miejsca rob co uwazasz za sluszne. imo bedzie trzeba wyjebac elevator.destination bo useless sie wydaje
+	else // od tego miejsca rob co uwazasz za sluszne. imo bedzie trzeba usunac elevator.destination bo useless sie wydaje
 	{
 
 		/*
@@ -130,10 +135,6 @@ void Elavator_logic(HWND hwnd)
 		4. czy ktos jest w danym kierunku ale by chcial w drugi kierunek
 		5. czy jest ktos w zlym kierunku 
 		*/
-		if (isSomeoneGettingOut() == true)
-		{
-			return;
-		}
 		if (humans_in_elavator.size() != 0)
 		{
 			for (int current_human = 0; current_human < humans_in_elavator.size(); current_human++)
@@ -145,32 +146,35 @@ void Elavator_logic(HWND hwnd)
 					if (current_human >= 0 && current_human < humans_in_elavator.size())
 					{
 						humans_in_elavator.erase(humans_in_elavator.begin() + current_human);
+						current_human--;
 					}
+					UpdateMassCounter(hwnd);
 				}
 			}
 			// tera znowu wywolac tego fora i sprawdzic czy ktos dalej chce jechac w tym kierunku. mozna do tego zrobic osobna bool funkcje
 		}
+		if (isSomeoneGettingOut() == true)
+		{
+			return;
+		}
 		
 		if (isSomeoneOnTheFloor(current_floor) == true)
 		{
-			//tego ifa raczej wyjebac calkowicie i zostawic samo CheckDestination
-			if(current_floor != elevator.Destination)
-			{
 				CheckDestination(current_floor, elevator.updown); // 
-			}
-			else
-			{
-				//????
-				//Destination = -1;????
-			}
 		}
 		else 
 		{
+			if (humans_in_elavator.size() != 0)
+			{
+				UpdateElevatorPosition(hwnd, elevator.updown);
+				return;
+			}
 			//ta funkcja LookForDestination do przeksztalcenia jest lekkiego ale zamysl imo git
 			int destination_buffer = LookForDestination(current_floor, elevator.updown);
 			switch (destination_buffer)
 			{
 			case 0:
+				//looking for destination
 				return;
 			case 1:
 				elevator.updown = true;
@@ -180,6 +184,13 @@ void Elavator_logic(HWND hwnd)
 				elevator.updown = false;
 				UpdateElevatorPosition(hwnd, elevator.updown);
 				return;
+			case 3:
+				elevator.updown = false;
+				UpdateElevatorPosition(hwnd, elevator.updown);
+			case 4:
+				elevator.updown = true;
+				UpdateElevatorPosition(hwnd, elevator.updown);
+
 			}
 		}
 
@@ -213,4 +224,45 @@ void DrawPoepleInElevator(HDC hdc)
 	{
 		DrawHuman(hdc, humans_in_elavator[current_human]);
 	}
+}
+
+bool IsThereAPlace()
+{
+	return (humans_in_elavator.size() >= 8) ? false : true;
+}
+
+void DrawMassCounter(HDC hdc)
+{
+	/*
+	Gdiplus::Graphics gf(hdc);
+	Gdiplus::FontFamily fontFamily(L"Arial");
+	Gdiplus::Font font(&fontFamily, 16, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+	Gdiplus::SolidBrush brush(Gdiplus::Color(255, 255, 0));
+
+	Gdiplus::StringFormat stringFormat;
+
+	stringFormat.SetAlignment(Gdiplus::StringAlignmentFar);
+
+	Gdiplus::RectF layoutRect(650, 10, 150, 30);
+	std::wstring textToDisplay = L"Hello, World!";
+	gf.DrawString((WCHAR*)(std::to_wstring(humans_in_elavator.size() * 70) + L" kg").c_str(), -1, &font, &stringFormat, &brush);
+	*/
+	Gdiplus::Graphics gf(hdc);
+	Gdiplus::SolidBrush blackBrush(Gdiplus::Color(255, 0, 0, 0));
+	Gdiplus::Font strFont(L"Arial", 13, 1);
+	Gdiplus::PointF elevatorPanelOrigin(400, 5);
+	Gdiplus::StringFormat stringFormat;
+
+	stringFormat.SetAlignment(Gdiplus::StringAlignmentFar);
+
+	Gdiplus::PointF kgPanelOrigin(700, 5);
+	gf.DrawString((WCHAR*)(std::to_wstring(humans_in_elavator.size() * 70) + L" kg").c_str(), -1, &strFont, kgPanelOrigin, &stringFormat, &blackBrush);
+
+}
+
+void UpdateMassCounter(HWND hwnd)
+{
+	RECT rectangleS = { 800 / 3 + 3, posY - (600 / 5) - 5  , (800 / 3) + 3 + 261, posY + 6 };
+	rectangleS = { 600, 0 , 800, 50 };
+	InvalidateRect(hwnd, &rectangleS, TRUE);
 }

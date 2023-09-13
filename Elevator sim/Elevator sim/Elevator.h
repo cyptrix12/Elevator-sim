@@ -25,3 +25,5 @@ void CheckHumanStateElvator();
 void Add_human_to_elavator(Human human);
 void Elavator_logic(HWND hwnd);
 void DrawPoepleInElevator(HDC hdc);
+void DrawMassCounter(HDC hdc);
+void UpdateMassCounter(HWND hwnd);
