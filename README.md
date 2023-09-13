@@ -9,6 +9,7 @@ Kod rozdzieliliśmy w pięciu plikach źródłowych:
 - Floors.cpp (zawiera logikę ludzi na piętrach)
 - Humans.cpp (zawiera strukturę ludzi oraz funkcje do rysowania ludzi
 - Źródło.cpp (main)
+
 Oraz w 5 odpowiadającym im plikach nagłówkowych:
 - Draw.h
 - Elevator.h
